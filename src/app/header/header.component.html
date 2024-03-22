@@ -1,0 +1,23 @@
+<nav class="navbar navbar-default">
+    <section class="container-fluid">
+        <section class="collapse navbar-collapse">
+            <ul class="nav navbar-nav">
+                <li><a id="navbar-home-icon" routerLinkActive="active" routerLink="/" [routerLinkActiveOptions]="{exact: true}">Home</a></li>
+                <li><app-searchbar></app-searchbar></li>
+                <li><button class="language-button" (click)="changeLanguage()" [disabled]="dutchButtonEnabled">EN</button></li>
+                <li><button class="language-button" (click)="changeLanguage()" [disabled]="englishButtonEnabled">NL</button></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a id="shopping-cart-button" routerLink="/winkelwagen" routerLinkActive="active"></a></li>
+                <li class="dropdown" appDropdown>
+                    <a  class="dropdown-toggle" role="button">Account <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a routerLinkActive="active" routerLink="/auth/login" class="account-dropdown" style="color: black">Inloggen</a></li>
+                        <li><a routerLinkActive="active" routerLink="/auth/registreren" class="account-dropdown" style="color: black">Registreren</a></li>
+                        <li><a class="account-dropdown" style="color: black">Uitloggen</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </section>
+    </section>
+</nav>

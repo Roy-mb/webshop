@@ -1,0 +1,23 @@
+@if (loadingProducts){
+<p>Loading products...</p>
+} @else {
+    <ul>
+@for (product of products; track $index){
+    <li>
+        <a routerLink="/product/{{product.id}}">
+            <img src="{{product.imageUrl}}" alt="">
+            <div class="content">
+                <div class="name">
+                    {{product.name}}
+                </div>
+                <div class="price">
+                    <span>
+                        € {{product.price}}
+                    </span>
+                </div>
+            </div>
+        </a>
+    </li>
+}
+</ul>
+}
