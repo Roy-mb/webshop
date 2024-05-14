@@ -2,19 +2,19 @@
     <section class="container-fluid">
         <section class="collapse navbar-collapse">
             <ul class="nav navbar-nav">
-                <li><a id="navbar-home-icon" routerLinkActive="active" routerLink="/" [routerLinkActiveOptions]="{exact: true}">Home</a></li>
-                <li><app-searchbar></app-searchbar></li>
-                <li><button class="language-button" (click)="changeLanguage()" [disabled]="dutchButtonEnabled">EN</button></li>
-                <li><button class="language-button" (click)="changeLanguage()" [disabled]="englishButtonEnabled">NL</button></li>
+                <li><a id="navbar-home-icon" class="nav-button" routerLinkActive="active" routerLink="/" [routerLinkActiveOptions]="{exact: true}">Home</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
-                <li><a id="shopping-cart-button" routerLink="/winkelwagen" routerLinkActive="active"></a></li>
+                <li><button id="size-button" (click)="toggleTextSize()">Tekst +</button></li>
+                <li><a id="shopping-cart-button" class="nav-button" routerLink="/winkelwagen" routerLinkActive="active"></a></li>
+                <li id="amount">({{getTotalAmount()}})</li>
                 <li class="dropdown" appDropdown>
                     <a  class="dropdown-toggle" role="button">Account <span class="caret"></span></a>
                     <ul class="dropdown-menu">
-                        <li><a routerLinkActive="active" routerLink="/auth/login" class="account-dropdown" style="color: black">Inloggen</a></li>
-                        <li><a routerLinkActive="active" routerLink="/auth/registreren" class="account-dropdown" style="color: black">Registreren</a></li>
-                        <li><a class="account-dropdown" style="color: black">Uitloggen</a></li>
+                        <li><a *ngIf="!isLoggedIn" routerLinkActive="active" routerLink="/auth/login" class="account-dropdown" style="color: black">Inloggen</a></li>
+                        <li><a *ngIf="!isLoggedIn" routerLinkActive="active" routerLink="/auth/registreren" class="account-dropdown" style="color: black">Registreren</a></li>
+                        <li><a *ngIf="isLoggedIn" routerLink="/bestelling" routerLinkActive="active" class="account-dropdown" style="color: black">Bestellingen</a></li>
+                        <li><a *ngIf="isLoggedIn" class="account-dropdown" routerLinkActive="active" style="color: black" (click)="onLogout()">Uitloggen</a></li>
                     </ul>
                 </li>
             </ul>

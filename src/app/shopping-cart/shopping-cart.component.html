@@ -1,47 +1,45 @@
 <div class="container">
-    <ul>
+    <ul>@if(products_in_cart.length < 1){
+        <h2 id="empty-cart-message">Winkelwagen is leeg!</h2>
+    }
         @for (product of products_in_cart; track $index){
         <li>
             <div>
-                <img [src]="product.imageUrl" [alt]="product.name">
+                <img [src]="product.image" [alt]="product.name">
             </div>
             <div>
                 <a routerLink="/product/{{product.id}}">
                     {{product.name}}
                 </a>
             </div>
-    
-            <!-- <div>
-                <select #quantitySelect (change)="changeQuantity(cartItem, quantitySelect.value)">
-                    <option>1</option>
-                    <option>2</option>
-                    <option>3</option>
-                    <option>4</option>
-                    <option>5</option>
-                </select>
-            </div> -->
-    
             <div>
-                € {{product.price}}
+                € {{(product.price * product.amount)}}
             </div>
-    
             <div>
-                <button class="remove-button" (click)="removeProductFromCart($index)">
+                {{product.amount}}x
+            </div>
+            <div>
+                <button (click)="removeProductFromCart($index)" class="remove-button">
                     Remove
                 </button>
             </div>
         </li>
     }
     </ul>
-    
-    <!-- <div class="checkout">
+    <div class="order">
         <div>
             <div class="products-count">
-                {{cart.items.length}}
+                {{getTotalAmount()}}
             </div>
             <div class="total-price">
-                € {{cart.totalPrice}}
+                € {{getTotalPrice()}}
+            </div>
+            <div>
+                <p id="login-message" *ngIf="!isLoggedIn">Log in om een bestelling te plaatsen</p>
+                <button id="order-button" [disabled]="!isLoggedIn" routerLinkActive="active" routerLink="/bestelgegevens">
+                    Bestellen
+                </button>
             </div>
         </div>
     </div>
-</div> -->
+</div>

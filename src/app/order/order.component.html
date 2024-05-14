@@ -1,0 +1,29 @@
+<h2>Bestellingen</h2>
+@if(checkedOrders.length < 0){
+    <h3>Er zijn nog geen bestellingen geplaatst!</h3>
+}@else{
+    @for (order of checkedOrders; track $index) {
+        <ul id="order-box">
+            <hr>
+            <div class="order-data">
+                <p id="order-number">Bestelling nummer: {{order.id}}</p>
+                <p id="email">Email adres: {{order.userEmail}}</p>
+                <p id="total-amount">Totaal aantal producten: {{order.totalAmount}}</p>
+                <p id="total-price">Totale prijs: € {{order.totalPrice}}</p>
+            </div>
+            <div class="products">
+                @for(product of order.cartItems; track $index){
+                    <div class="product">
+                        <p>{{product.name}} | {{order.productAmount[$index]}}x</p>
+                        <p id="product-price">
+                            € {{product.price}}
+                        </p> 
+                        @if($index + 1 < order.cartItems.length){
+                            <hr>
+                        }
+                    </div>
+                }
+            </div>
+        </ul>
+    }
+}

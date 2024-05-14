@@ -1,5 +1,5 @@
 <div class="container">
-    <img [src]="product.imageUrl" [alt]="product.name">
+    <img [src]="product.image" [alt]="product.name">
     <div class="details">
         <div class="header">
             <span class="name">
@@ -14,9 +14,22 @@
                 € {{product.price}}
             </span>
         </div>
-        <button (click)="onBuyProduct(product)">
-            Add to cart
-        </button>
+        @if (!isLoggedIn) {
+            <button routerLinkActive="active" routerLink="/auth/login" (click)="showLoginAlert()">
+                Add to cart
+            </button>
+        }
+        @else if(isLoggedIn && product.amount < 1){
+            <button disabled="true" (click)="showNoItemsInStockAlert">
+                Niet op voorraad
+            </button>
+        }
+        @else if(isLoggedIn && product.amount > 0) {
+            <button (click)="onBuyProduct(product)">
+                Add to cart
+            </button>
+        }
+
     </div>
 </div>
 

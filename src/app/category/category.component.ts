@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Category } from '../shared/models/Category';
-import { ProductService } from '../services/products/product.service';
+import { CategoryService } from '../services/category.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-category',
@@ -9,13 +10,21 @@ import { ProductService } from '../services/products/product.service';
 })
 export class CategoryComponent {
 
-  categories:Category[];
+  public categories: Category[] = new Array<Category>();
+  public loadingCategories: boolean = true;
 
-  constructor(private productService:ProductService){
+  constructor(private categoryService: CategoryService, private activatedRoute: ActivatedRoute){
 
   }
 
-  // ngOnInit(){
-  //   this.categories = this.productService.getAllCategories();
-  // }
+  
+  ngOnInit(): void {
+    this.categoryService
+      .getCategories()
+      .subscribe((categories: Category[]) => {
+        this.loadingCategories = false;
+        this.categories = categories;
+      });
+  }
 }
+

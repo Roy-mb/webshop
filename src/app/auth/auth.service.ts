@@ -4,19 +4,23 @@ import { AuthResponse } from './auth-response.model';
 import { BehaviorSubject, Observable, tap } from 'rxjs';
 import { AuthRequest } from './auth-request.model';
 import { TokenService } from './token.service';
+import { UserService } from '../services/user.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
-  private _loginEndpoint: string = 'http://localhost:8080/api/auth/login';
-  private _registerEndpoint: string = 'http://localhost:8080/api/auth/login';
+
+  private _loginEndpoint: string =  "http://localhost:8080/api/auth/login"
+  private _registerEndpoint: string =  "http://localhost:8080/api/auth/register"
+  // private _loginEndpoint: string = 'http://s1149514.student.inf-hsleiden.nl:29514/api/auth/login';
+  // private _registerEndpoint: string = 'http://s1149514.student.inf-hsleiden.nl:29514/api/auth/register';
   
   public $userIsLoggedIn: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
-  constructor(private http: HttpClient, private tokenService: TokenService) {
-    if(this.tokenService.isValid()){
+  constructor(private http: HttpClient, private tokenService: TokenService, private userService: UserService) {
+    if(this.tokenService.isValid() && this.userService.loadVerified() != null){
       this.$userIsLoggedIn.next(true);
     }
   }
@@ -29,6 +33,8 @@ export class AuthService {
         tap((authResponse: AuthResponse) => {
           this.tokenService.storeToken(authResponse.token);
           this.$userIsLoggedIn.next(true);
+          this.userService.storeEmail(authRequest.email);
+          this.userService.storeVerified("Is verified");
         })
       );
   }
@@ -39,13 +45,13 @@ export class AuthService {
     .pipe(
       tap((authResponse: AuthResponse) => {
         this.tokenService.storeToken(authResponse.token);
-        this.$userIsLoggedIn.next(true);
+        this.userService.storeEmail(authRequest.email);
       })
     );
   }
 
   public logOut(): void{
-    this.tokenService.removeToken();
+    localStorage.clear();
     this.$userIsLoggedIn.next(false);
   }
 }

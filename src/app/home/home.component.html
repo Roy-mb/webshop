@@ -1,11 +1,19 @@
+<app-category></app-category>
+<!-- <select id="categories" #category (change)="onSelectedCategory()">
+    <option selected disabled >Categorieën</option>
+    <option value="Muizen">Dit gaat over Muizen</option>
+    <option value="Koptelefoons">Dit gaat over Koptelefoons</option>
+    <option value="Microfoons">Dit gaat over Microfoons</option>
+    <option value="Toetsenborden">Dit gaat over Toetsenborden</option>
+</select> -->
 @if (loadingProducts){
 <p>Loading products...</p>
 } @else {
     <ul>
 @for (product of products; track $index){
     <li>
-        <a routerLink="/product/{{product.id}}">
-            <img src="{{product.imageUrl}}" alt="">
+        <a routerLink="/products/{{product.id}}">
+            <img src="{{product.image}}" alt="">
             <div class="content">
                 <div class="name">
                     {{product.name}}

@@ -1,9 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { AuthService } from '../auth.service';
+import { AuthResponse } from '../auth-response.model';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-register',
+  standalone:true,
+  imports:[ReactiveFormsModule],
   templateUrl: './register.component.html',
   styleUrl: './register.component.scss'
 })
@@ -11,7 +15,7 @@ export class RegisterComponent implements OnInit{
   
   public registerForm: FormGroup;
   
-  constructor(private fb: FormBuilder,private authService: AuthService
+  constructor(private fb: FormBuilder,private authService: AuthService, private router: Router
      ){
   }
 
@@ -25,7 +29,15 @@ export class RegisterComponent implements OnInit{
     });
   }
 
+
+
   public onSubmit(): void{
-    console.log('ok');
+    this.authService
+      .register(this.registerForm.value)
+      .subscribe((authResponse: AuthResponse) => {
+        console.log('AuthResponse: ', authResponse);
+        alert("Account succesvol aangemaakt!")
+        this.router.navigate(['']);
+      });
   }
 }

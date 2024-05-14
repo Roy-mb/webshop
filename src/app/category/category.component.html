@@ -1,5 +1,15 @@
-<div id="categories" *ngIf="categories">
+@if(loadingCategories){
+    <p>Loading categories...</p>
+}
+<div id="categories">
+@for(category of categories; track $index){
+        <a id="category" routerLink="/category/{{category.name}}">
+            {{category.name}}
+        </a>
+    }
+</div>
+<!-- <div id="categories" *ngIf="categories">
     <a id="category" *ngFor="let category of categories" routerLink="/category/{{category.name}}">
         {{category.name}}({{category.count}})
     </a>
-</div>
+</div> -->

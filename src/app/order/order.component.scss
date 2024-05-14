@@ -1,0 +1,46 @@
+
+h2{
+    margin: 3rem;
+    margin-left: 5rem;
+}
+ul{
+    display: flex;
+    font-size: 1.5rem;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: space-evenly;
+    border: 1px solid #ffbbbb;
+    border-radius: 1rem;
+    list-style: none;
+    margin: .5rem;
+    padding-right: 0;
+}
+.order-data{
+    display: flex;
+    flex: 1 0;
+    flex-direction: column;
+    margin-top: 1rem;
+    justify-content: space-evenly;
+}
+#order-box{
+    margin: 3rem;
+}
+.products{
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    flex: 1 0;
+    // position: relative;
+    // bottom: 15rem;
+    // left: 80rem;
+    border-left: solid 1px #ffbbbb;
+    padding-left: 2rem;
+    justify-content: space-evenly;
+}
+.product{
+    margin-top: 1rem;
+}
+#product-price::before{
+    content: "Prijs per product: ";
+    color: darkgrey;
+}

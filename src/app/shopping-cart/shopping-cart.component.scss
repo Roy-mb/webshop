@@ -90,13 +90,13 @@ ul{
     }
 }
 
-.checkout{
+.order{
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: space-evenly;
     align-items: center;
     flex: 2 3;
-    height: 20rem;
+    height: 15rem;
     border: 1px solid #ffbbbb;
     border-radius: 1rem;
     padding: .5rem;
@@ -104,7 +104,7 @@ ul{
     margin-left: 2rem;
 }
 
-.checkout>div{
+.order>div{
     font-size: 1.4rem;
     margin: 1rem;
     flex: 3;
@@ -114,22 +114,49 @@ ul{
     align-items: flex-start;
 }
 
-.checkout{
+.order{
     .products-count{
         margin-bottom: 1.5rem;
     }
 }
 
-.checkout{
+.order{
     .products-count::before{
-        content: 'Count: ';
+        content: 'Aantal: ';
         color: grey;
     }
 }
 
-.checkout{
+.order{
     .total-price::before{
-        content: 'Price: ';
+        content: 'Prijs: ';
         color: grey;
     }
+}
+
+#order-button{
+            border-radius: 1rem;
+            border: solid 1px black;  
+            padding: .5rem;
+            color: white;
+            background: rgb(0, 64, 255);
+            opacity: .7;
+            margin-top: 20px;
+}
+#order-button:hover{
+    opacity: 1;
+    cursor: pointer;
+}
+#empty-cart-message{
+    align-self: center;
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+#login-message{
+    margin-top: 15px;
+    margin-bottom: 0px;
+}
+.form-control{
+    margin-right: 1rem;
+    margin-top: 1.4rem;
 }

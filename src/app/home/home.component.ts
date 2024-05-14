@@ -1,7 +1,9 @@
-import { Component } from '@angular/core';
-import { ProductService } from '../services/products/product.service';
+import { Component, ElementRef, ViewChild } from '@angular/core';
+import { ProductService } from '../services/product.service';
 import { Product } from '../shared/models/Product';
 import { ActivatedRoute } from '@angular/router';
+import { CategoryService } from '../services/category.service';
+import { Category } from '../shared/models/Category';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -9,10 +11,14 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class HomeComponent {
 
+  public product: Product;
   public products: Product[] = new Array<Product>();
   public loadingProducts: boolean = true;
-  
-  constructor(private productService: ProductService, private route:ActivatedRoute){
+  // public categoryProducts: Product[] =  new Array<Product>();
+  // public categories: Category[] = new Array<Category>();
+  // public category: Category;
+
+  constructor(private productService: ProductService, private route:ActivatedRoute, private categoryService: CategoryService){
 
   }
 
@@ -25,16 +31,5 @@ export class HomeComponent {
       });
   }
 
-  // ngOnInit(): void {
-  //   this.route.params.subscribe(params => {
-  //     if(params.searchTerm)
-  //       this.products = this.productService.getAllProductsBySearchTerm(params.searchTerm);
-  //     else if(params.category)
-  //       this.products = this.productService.getAllProductsByCategory(params.category);
-  //     else
-  //       this.products = this.productService.getAll();
-  //   })
-
-  // }
 
 }

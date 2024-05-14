@@ -1,0 +1,15 @@
+<section>
+    <h1>Vul hier uw gegevens in</h1>
+    <div>
+        <input placeholder="Voornaam" id="firstname" class="form-control">
+    </div>
+    <div>
+        <input placeholder="Achternaam" id="lastname" class="form-control">
+    </div>
+    <div>
+        <input placeholder="Adres" id="address" class="form-control">
+    </div>
+    <button id="order-button" (click)="completeOrder()" routerLinkActive="active" routerLink="/bestelling">
+        Plaats bestelling
+    </button>
+</section>

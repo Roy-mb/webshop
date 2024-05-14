@@ -1,18 +1,22 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { AuthService } from '../auth.service';
 import { AuthRequest } from '../auth-request.model';
 import { AuthResponse } from '../auth-response.model';
 import { Router } from '@angular/router';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-login',
+  standalone:true,
+  imports:[ReactiveFormsModule],
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss'
 })
 export class LoginComponent implements OnInit{
   
   public loginForm: FormGroup;
+  public error: string;
 
   constructor(private fb: FormBuilder, private authService: AuthService, private router: Router){}
 
@@ -28,8 +32,16 @@ export class LoginComponent implements OnInit{
       .login(this.loginForm.value)
       .subscribe((authReponse: AuthResponse) => {
         console.log('AuthResponse: ', authReponse);
+        alert("Succesvol ingelogd!")
         this.router.navigate(['']);
-      });
+      }, 
+      err => {
+        if(err instanceof HttpErrorResponse){
+          if(err.status === 403){
+            this.error = "Wachtwoord of email is onjuist";
+          }
+      }}
+      );
   }
  }
 
